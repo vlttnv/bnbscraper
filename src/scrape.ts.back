@@ -1,0 +1,103 @@
+import * as puppeteer from "puppeteer";
+
+
+async function getImages(page:any) {
+  const buttonSelector = '._1f4354o4';
+  await page.waitForSelector(buttonSelector);
+
+  await page.evaluate((buttonSelector: string) => {
+    // Needs to be any since the typechecker can't see the click methong on element
+    const element: any = document.querySelector(buttonSelector);
+    if (element) {
+      element.click();
+    }
+
+  }, buttonSelector);
+
+  const imgSelector = '._ykpu92';
+  await page.waitForSelector(imgSelector);
+
+  const links = await page.evaluate((imgSelector: string) => {
+    const anchors = Array.from(document.querySelectorAll(imgSelector));
+    return anchors.map(anchor => {
+      return `${anchor.getAttribute('src')}`;
+    });
+  }, imgSelector);
+  console.log(links.join('\n'));
+}
+
+async function getDsecription(page:any) {
+  const descButtonSelector = '#details > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > button:nth-child(1)';
+  await page.waitForSelector(descButtonSelector);
+
+  await page.evaluate((descButtonSelector: string) => {
+    // Needs to be any since the typechecker can't see the click methong on element
+    const element: any = document.querySelector(descButtonSelector);
+    if (element) {
+      element.click();
+    }
+
+  }, descButtonSelector);
+
+  const descSelector = '#details';
+  await page.waitForSelector(descSelector);
+
+  const description = await page.evaluate((descSelector: string) => {
+    const titleElement = document.querySelector(descSelector);
+    if (titleElement) {
+      return titleElement.textContent;
+    }
+  }, descSelector);
+  console.log(description);
+}
+
+async function getAmenities(page:any) {
+  const amenitiesButton = '#amenities > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > section:nth-child(1) > div:nth-child(3) > div:nth-child(1) > button:nth-child(1)';
+
+  await page.waitForSelector("#amenities")
+  await page.waitForSelector(amenitiesButton);
+  await page.$eval(amenitiesButton, (elem: any) => elem.click());
+  
+  // const amSelector = "._wpwi48 > section:nth-child(3)"
+  // await page.waitForSelector(amSelector);
+  // const amenities = await page.evaluate((amSelector: string) => {
+  // const sectionElement = document.querySelector(amSelector);
+
+  //   if (sectionElement) {
+  //     return sectionElement.textContent;
+  //     // Can be parse better and pretified
+  //     // const sections = Array.from(sectionElement.querySelectorAll("section"));
+  //     // return sections;
+  //   }
+  // }, amSelector);
+  // console.log(amenities);
+}
+
+async function getTitle(page:any) {
+  const titleSelector = '._18hrqvin';
+  await page.waitForSelector(titleSelector);
+  const title = await page.evaluate((titleSelector: string) => {
+    const titleElement = document.querySelector(titleSelector);
+    if (titleElement) {
+      return titleElement.textContent;
+    }
+  }, titleSelector);
+  console.log(title);
+}
+
+
+
+(async () => {
+
+const browser = await puppeteer.launch();
+const page = await browser.newPage();
+
+await page.goto('https://www.airbnb.com/rooms/28299515?location=London%2C%20United%20Kingdom&adults=1&toddlers=0&guests=1&check_in=2019-04-26&check_out=2019-04-30&s=-xq9rVl0');
+
+// await getTitle(page);
+// await getImages(page);
+// await getDsecription(page);
+await getAmenities(page);
+
+await browser.close();
+})();

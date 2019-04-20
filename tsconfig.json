@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "target": "es2017",
+        "module": "commonjs",
+        "outDir": "./bin",
+        "sourceMap": true,
+        "strict": true,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "plugins": [
+            {
+                "name": "typescript-tslint-plugin"
+            }
+        ]
+    },
+    "include": [
+        "src/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}

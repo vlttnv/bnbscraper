@@ -1,0 +1,25 @@
+{
+  "name": "bnbscraper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bin/index.js",
+  "bin": {
+    "bnbscraper": "scrape.js"
+  },
+  "dependencies": {
+    "@types/cheerio": "^0.22.11",
+    "@types/request-promise-native": "^1.0.15",
+    "cheerio": "^1.0.0-rc.3",
+    "query-string": "^6.4.2",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.7",
+    "typescript": "^3.4.4",
+    "typescript-tslint-plugin": "^0.3.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
