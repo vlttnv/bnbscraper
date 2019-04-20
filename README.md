@@ -5,7 +5,7 @@ This repo contains a simple scraper that given an Airbnb listing URL returns JSO
 ```
 npm install
 tsc
-node src/scrape.js
+node bin/scrape.js
 ```
 ## Overview
 The way this scraper works is by extracting the commented out JSON data inside a script tag in the page. Other approaches like using a headless browser were also attempted but they were less efficient and more error prone.
