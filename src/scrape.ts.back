@@ -1,3 +1,8 @@
+//
+//  Attempt at using puppeteer to do headless scraping
+//  Ran into a bug in puppetteer with timouts and a race condition when clicking
+//
+
 import * as puppeteer from "puppeteer";
 
 
